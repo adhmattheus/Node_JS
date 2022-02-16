@@ -1,0 +1,24 @@
+POST http://localhost:4002/products
+content-Type: application/json
+
+{
+  "name": "Bola de cristal",
+  "price": "50"
+}
+
+###
+
+GET http://localhost:4002/products
+###
+GET http://localhost:4002/products/4882da3e-aa4e-49b1-9b47-fa0b570b7b97
+###
+PUT http://localhost:4002/products/77a39694-87ad-4c2c-a10e-d80d3fb4db32
+content-Type: application/json
+
+{
+  "name": "Bola de Cristal PRata",
+  "price": "15"
+}
+
+###
+DELETE http://localhost:4002/products/0c853cac-556b-4620-b05d-b0ffbe425e09
