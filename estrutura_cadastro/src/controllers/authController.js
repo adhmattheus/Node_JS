@@ -3,11 +3,19 @@ const User = require('../models/User');
 const router = express.Router();
 
 router.post('/register', async (req, res) => {
-  try {
-    const user = await User.create(req.body);
+  const { email } = req.body;
 
-    res.send({ user });
+  try {
+    if (await User.findOne({ email }))
+      return res.status(400).send({ error: 'Uusário já existe' });
+
+    const user = await User.create(req.body);
+    user.password = undefined;
+
+    return res.send({ user });
   } catch (err) {
-    res.status(400).send({ error: 'Falha no registro' });
+    return res.status(400).send({ error: 'Falha no registro' });
   }
 });
+
+module.exports = app => app.use('/auth', router);
