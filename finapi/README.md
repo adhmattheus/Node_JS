@@ -12,7 +12,8 @@ Finapi | Financeira é uma api com as seguintes opções:
 - Deletar uma conta
 
 Regras de negócio:
--Não é possível cadastrar uma conta com CPF já existente
+
+- Não é possível cadastrar uma conta com CPF já existente
 - Não é possível fazer depósito em uma conta não existente
 - Não é possível buscar extrato em uma conta não existente
 - Não é possível fazer saque em uma conta não existente
