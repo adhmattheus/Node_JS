@@ -3,22 +3,28 @@ const { v4: uuidv4 } = require('uuid')
 const app = express();
 app.use(express.json());
 
-const costomers = []; //banco de dados fake
+const customers = []; //banco de dados fake
 
 /*componentes da conta: cpf/name/id/statement*/
-
 app.post('/account', (req, res) => { //criar conta
   const { cpf, name } = req.body;
 
-  const id = uuidv4();
+  const customersAlreadyExists = customers.some(
+    (customer) => customer.cpf === cpf
+  );
 
-  costomers.push({
+  if (customersAlreadyExists) {
+    return res.status(400).json({ error: 'Customer already exists!' });
+  }
+
+  customers.push({
     cpf,
     name,
-    id,
+    id: uuidv4(),
     statement: []
   });
-  return res.status(201).send({ message: 'Conta criado com sucesso!' });
+
+  return res.status(201).send({ message: 'Account created successfully!' });
 });
 
 
