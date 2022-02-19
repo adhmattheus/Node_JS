@@ -9,11 +9,11 @@ const customers = []; //banco de dados fake
 app.post('/account', (req, res) => { //criar conta
   const { cpf, name } = req.body;
 
-  const customersAlreadyExists = customers.some(
+  const customerAlreadyExists = customers.some(
     (customer) => customer.cpf === cpf
   );
 
-  if (customersAlreadyExists) {
+  if (customerAlreadyExists) {
     return res.status(400).json({ error: 'Customer already exists!' });
   }
 
@@ -25,6 +25,13 @@ app.post('/account', (req, res) => { //criar conta
   });
 
   return res.status(201).send({ message: 'Account created successfully!' });
+});
+
+app.get('/statement/:cpf', (req, res) => {
+  const { cpf } = req.params;
+
+  const customer = customers.find(customer => customer.cpf === cpf); // encontrar o cpf e retornar os dados
+  return res.json(customer.statement);
 });
 
 
