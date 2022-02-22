@@ -101,6 +101,15 @@ app.get('/statement/date', verifyIfExistsAccountCPF, (req, res) => {
   return res.json(customer.statement);
 });
 
+app.put('/account', verifyIfExistsAccountCPF, (req, res) => {
+  const { name } = req.body;
+  const { customer } = req;
+
+  customer.name = name;
+
+  return res.status(201).send({ message: 'Account successfully changed!' })
+});
+
 
 app.listen(3000);
 console.log('server running . . .');
