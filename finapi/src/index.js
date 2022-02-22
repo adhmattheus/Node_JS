@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');//v4 = gera um nunmero aleatorio
 const app = express();
 app.use(express.json());
 
-const customers = []
+const customers = [];
 
 //middleware
 function verifyIfExistsAccountCPF(req, res, next) {
@@ -114,6 +114,14 @@ app.get('/account', verifyIfExistsAccountCPF, (req, res) => {
   const { customer } = req;
 
   return res.json(customer);
+});
+
+app.delete('/account', verifyIfExistsAccountCPF, (req, res) => {
+  const { customer } = req;
+  //splice
+  customers.splice(customer, 1);
+
+  return res.status(200).json({ customers });
 });
 
 
